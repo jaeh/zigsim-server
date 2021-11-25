@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@grundstein/gss": "0.0.4",
     "zigsim-ws": "1.0.0"
   }
 }
