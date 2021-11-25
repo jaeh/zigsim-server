@@ -5,6 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "server": "node src/index.js",
+    "client": "gss --dir ./src/ --cache 'no' -p 8000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
