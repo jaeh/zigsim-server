@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic p5 example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.3.1/p5.min.js"
+        integrity="sha512-gQVBYBvfC+uyor5Teonjr9nmY1bN+DlOCezkhzg4ShpC5q81ogvFsr5IV4xXAj6HEtG7M1Pb2JCha97tVFItYQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        let touchX = 0;
+        let touchY = 0;
+
+        // Connect to our websocket server , this server was created when you typed `node index.js`
+        const ws = new WebSocket("ws://localhost:8080")
+
+        ws.onmessage = (event) => {
+            const dataAsString = event.data;
+            const dataAsObject = JSON.parse(dataAsString)
+            const sensorData = dataAsObject.sensordata;
+            // You might want to see how the data is recieved, uncomment this line
+            console.log(sensorData)
+            if (sensorData.touch.length > 0) {
+                const firstFingerTouch = sensorData.touch[0];
+                // set the global variables touchX, touchY
+                // firstFingerTouch.x goes from -1 to 1 (also the y), so we map it to out canvas coordinates
+                touchX = map(firstFingerTouch.x, -1, 1, 0, 400);
+                touchY = map(firstFingerTouch.y, -1, 1, 0, 400);
+            }
+            if (sensorData.compass) {
+                console.log(sensorData.compass)
+            }
+        }
+
+        function setup() {
+            createCanvas(400, 400)
+        }
+
+        function draw() {
+            background(0);
+            fill(255)
+            ellipse(touchX, touchY, 100, 100)
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
