@@ -5,7 +5,7 @@ this repository includes both the websocket server (src/index.js) as well as the
 uses [zigsim-ws](https://github.com/acrylicode/zigsim-ws)
 
 
-```
+```bash
 # getting started
 
 git clone git@github.com/jaeh/zigsim-server
